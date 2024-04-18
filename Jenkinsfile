@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    dockerImage = docker.build('web')
+                    docker.build('web', './dockerfiles')
                 }
             }
         }
@@ -15,9 +15,10 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    dockerImage.run('-p 5050:80 --name webapp')
+                    docker.image('web').run('-p 5050:80 --name webapp')
                 }
             }
         }
     }
 }
+
