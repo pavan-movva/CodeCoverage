@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    docker.build('web', './dockerfiles')
+                    docker.build('web', './Dockerfile')
                 }
             }
         }
