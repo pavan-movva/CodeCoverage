@@ -13,7 +13,7 @@ pipeline {
                 // Build Docker image
                 script {
                     def dockerfilePath = "${WORKSPACE}/Dockerfile" // Path to Dockerfile in Jenkins workspace
-                    docker.build("your-image-name", "-f ${dockerfilePath} .")
+                    docker.build("your-image-name", "--file ${dockerfilePath} .")
                 }
             }
         }
@@ -39,5 +39,3 @@ pipeline {
         }
     }
 }
-
-
