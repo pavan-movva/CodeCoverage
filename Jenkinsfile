@@ -1,24 +1,51 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE_NAME = 'my-docker-image'
+        GITHUB_REPO_URL = 'https://github.com/Balajiavinash/jenkinsDemo.git'
+    }
+
     stages {
-        stage('Build Image') {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: "${env.GITHUB_REPO_URL}"
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerfilePath = "${WORKSPACE}/Dockerfile"
-                    def imageName = "your-image-name"
-                    docker.build(imageName, "-f ${dockerfilePath} .")
+                    docker.build("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
                 }
             }
         }
 
-        stage('Run Container') {
+        stage('Push Docker Image to Registry') {
             steps {
                 script {
-                    def containerName = "your-container-name"
-                    docker.image("your-image-name").run("-d -p 8080:80 --name ${containerName}")
+                    docker.withRegistry('https://dockerhub.com', 'b9adb166-3990-4c3d-bf92-6d37235e418b') {
+                        docker.image("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}").push('latest')
+                    }
                 }
             }
+        }
+
+        stage('Deploy Docker Container') {
+            steps {
+                script {
+                    docker.run("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}", '--name my-container -d -p 8080:8080')
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
         }
     }
 }
