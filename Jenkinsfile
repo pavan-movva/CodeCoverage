@@ -21,18 +21,6 @@ pipeline {
             }
         }
 
-        stage('Navigate to Docker Image Directory') {
-            steps {
-                script {
-                    def workspace = pwd() // Get the current workspace directory
-                    dir(workspace) {
-                        // Perform actions in the workspace directory
-                        sh 'ls -l' // Example command to list files in the directory
-                    }
-                }
-            }
-        }
-
         stage('Push Docker Image to Registry') {
             steps {
                 script {
