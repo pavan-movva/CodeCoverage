@@ -16,7 +16,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
+                    // Specify the path to the Dockerfile relative to the repository root
+                    docker.build("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}", "-f path/to/Dockerfile .")
                 }
             }
         }
