@@ -16,8 +16,19 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Specify the path to the Dockerfile relative to the repository root
-                    docker.build("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}", "-f path/to/Dockerfile .")
+                    docker.build("${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}")
+                }
+            }
+        }
+
+        stage('Navigate to Docker Image Directory') {
+            steps {
+                script {
+                    def workspace = pwd() // Get the current workspace directory
+                    dir(workspace) {
+                        // Perform actions in the workspace directory
+                        sh 'ls -l' // Example command to list files in the directory
+                    }
                 }
             }
         }
