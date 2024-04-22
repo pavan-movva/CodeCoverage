@@ -11,7 +11,7 @@ WORKDIR /webapp
 COPY . /webapp/
 
 # Compile your Java application
-RUN javac Palindrome.java
+RUN javac PalindromeTest.java
 
 # Expose the port that your application listens on
 EXPOSE 5050
