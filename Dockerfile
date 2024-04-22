@@ -1,11 +1,14 @@
-# Use the official NGINX image as the base image
+# Use the official OpenJDK image as the base image
 FROM openjdk:latest
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy all files from the current directory to the working directory in the container
-COPY . .
+# Copy the JAR file from the current directory to the working directory in the container
+COPY target/javademo.jar .
 
-# Expose port 80 for the NGINX web server
-EXPOSE 80
+# Expose the port that your Java application listens on
+EXPOSE 8080
+
+# Define the command to run your Java application
+CMD ["java", "-jar", "javademo.jar"]
