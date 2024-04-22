@@ -1,4 +1,4 @@
-FROM java:17
+FROM java:19
 
 # add the container directory from the host
 RUN mkdir /webapp
