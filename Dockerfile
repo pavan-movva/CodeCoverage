@@ -1,14 +1,12 @@
-FROM java:19
+# Use the official NGINX image as the base image
+FROM nginx:latest
 
-# add the container directory from the host
-RUN mkdir /webapp
+# Set the working directory inside the container
+WORKDIR /usr/share/nginx/html
 
-# copy the app to container directory
-ADD . webapp
+# Copy all files from the current directory to the working directory in the container
+COPY . .
 
-WORKDIR /webapp
-
-RUN javac Main.java
-
-CMD java Main
+# Expose port 80 for the NGINX web server
+EXPOSE 80
 
