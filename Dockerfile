@@ -1,11 +1,20 @@
-# Use the official NGINX image as the base image
-FROM nginx:latest
+# Use a base image that includes the necessary tools for running your application
+FROM openjdk:8
+
+# Create a directory named 'webapp' inside the working directory
+RUN mkdir /webapp
 
 # Set the working directory inside the container
-WORKDIR /usr/share/nginx/html
+WORKDIR /webapp
 
-# Copy all files from the current directory to the working directory in the container
-COPY . .
+# Copy your Java application source code into the container
+COPY . /webapp/
 
-# Expose port 80 for the NGINX web server
-EXPOSE 80
+# Compile your Java application
+RUN javac Main.java
+
+# Expose the port that your application listens on
+EXPOSE 5050
+
+# Specify the command to run your Java application
+CMD ["java", "Main"]
