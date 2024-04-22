@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    dockerImage.run('-p 5050:80 --name webapp')
+                    dockerImage.run('-p 5050:80 --name app')
                 }
             }
         }
