@@ -11,10 +11,11 @@ WORKDIR /webapp
 COPY . /webapp/
 
 # Compile your Java application
-RUN javac Main.java
+RUN javac Palindrome.java
 
 # Expose the port that your application listens on
 EXPOSE 5050
 
 # Specify the command to run your Java application
 CMD ["java", "Main"]
+
