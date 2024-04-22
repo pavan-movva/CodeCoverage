@@ -1,21 +1,14 @@
-# Use a base image that includes the necessary tools for running your application
-FROM openjdk:8
+FROM java:8
 
-# Create a directory named 'webapp' inside the working directory
+# add the container directory from the host
 RUN mkdir /webapp
 
-# Set the working directory inside the container
+# copy the app to container directory
+ADD . webapp
+
 WORKDIR /webapp
 
-# Copy your Java application source code into the container
-COPY . /webapp/
+RUN javac Main.java
 
-# Compile your Java application
-RUN javac PalindromeTest.java
-
-# Expose the port that your application listens on
-EXPOSE 5050
-
-# Specify the command to run your Java application
-CMD ["java", "Main"]
+CMD java Main
 
