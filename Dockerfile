@@ -5,10 +5,10 @@ FROM openjdk:8
 EXPOSE 8080
 
 # Set the working directory inside the container to '/webapp'
-WORKDIR /webapp
+WORKDIR /testing
 
 # Copy the Java source code file 'Palindrome.java' into the container's '/webapp' directory
-COPY Palindrome.java /webapp/
+COPY /var/lib/jenkins/workspace/testing
 
 # Compile the Java source code file 'Palindrome.java' to generate the corresponding class file
 RUN javac Palindrome.java
