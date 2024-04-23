@@ -4,9 +4,6 @@ FROM openjdk:8
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
-# Create a directory named 'webapp' inside the container
-RUN mkdir /webapp
-
 # Set the working directory inside the container to '/webapp'
 WORKDIR /webapp
 
