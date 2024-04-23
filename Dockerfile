@@ -1,9 +1,11 @@
-#FROM openjdk:8
+# Use the official NGINX image as the base image
+FROM nginx:latest
 
-#WORKDIR /usr/src/app
+# Set the working directory inside the container
+WORKDIR /usr/share/nginx/html
 
-#COPY . /usr/src/app
+# Copy all files from the current directory to the working directory in the container
+COPY . .
 
-#RUN mvn clean package
-
-#CMD ["java", "-cp", "target/classes", "com.training.example.JacocoExample.PalindromeTest"]
+# Expose port 80 for the NGINX web server
+EXPOSE 80
