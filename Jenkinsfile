@@ -1,8 +1,8 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     // Build Docker image
@@ -10,13 +10,31 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy') {
+        
+        stage('Deploy Docker Container') {
             steps {
                 script {
                     // Run Docker container
-                    dockerImage.run('-p 5050:80 --name app1')
+                    dockerImage.run('-p 4040:80 --name 20webapps')
                 }
+            }
+        }
+        
+        stage('Build Application') {
+            steps {
+                echo "Building application"
+            }
+        }
+        
+        stage('Get Approval') {
+            steps {
+                input "Approval for deployment"
+            }
+        }
+        
+        stage('Deploy Application') {
+            steps {
+                echo "Deployment Application"
             }
         }
     }
