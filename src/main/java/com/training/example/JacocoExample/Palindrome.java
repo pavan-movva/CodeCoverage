@@ -9,7 +9,7 @@ public class Palindrome {
 	    	String rev = "";
 	    	int length = inputString.length();
 	    	 
-	        for ( int i = length - 1; i >= 0; i-- )
+	        for ( int i = length - 1; i >0; i-- )
 	           rev = rev + inputString.charAt(i);
 	   
 	        if (inputString.equals(rev))
