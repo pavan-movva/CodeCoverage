@@ -3,7 +3,7 @@ package com.training.example.JacocoExample;
 public class Palindrome {
 	
 	public boolean isPalindrome(String inputString) {
-	    if (inputString.length() == 0) {
+	    if (inputString.length() == 0) { 
 	        return true;
 	    } else {
 	    	String rev = "";
